@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   # GET /comments
   def index
     @comment = Comment.all
-    respond_with(@comment)
     render :json => @comment
   end
 
@@ -19,21 +18,27 @@ class CommentsController < ApplicationController
     if @comment.save
       render :json => @comment, :status => 201
     else
-      if(@comment.valid?)
-        render :json => {:errors =>@comment.errors.full_messages}, :status => 422
-      else
-      render :json => {:errors =>@comment.errors.full_messages}, :status => 400
-      end
+      render :json => {:errors => @comment.errors.full_messages}, :status => 400
     end
   end
 
   # PUT /comments/1
   def update
-    @comment = Comment.update(params[:content])
+    @comment = Comment.find(params[:id])
+    if(@comment.update_attributes(params[:comment]))
+      render :json => @comment, :status => 204
+    else
+      render :json => {:errors => @comment.errors.full_messages}, :status => 400
+    end
   end
 
   # DELETE /comments/1
   def destroy
-    @comment = Comment.destroy
+    @comment = Comment.find(params[:id]).destroy
+    if(@comment.valid?)
+      render :json => @comment, :status => 204
+    else
+      render :json => @comment, :status => 303
+    end
   end
 end
