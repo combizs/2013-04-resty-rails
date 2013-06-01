@@ -35,10 +35,6 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   def destroy
     @group = Group.find(params[:id]).destroy
-    if(@group.valid?)
-      render :json => @group, :status => 204
-    else
-      render :json => @group, :status => 303
-    end
+    head :no_content
   end
 end

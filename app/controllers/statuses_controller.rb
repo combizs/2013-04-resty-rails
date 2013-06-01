@@ -35,10 +35,6 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   def destroy
     @status = Status.find(params[:id]).destroy
-    if(@status.valid?)
-      render :json => @status, :status => 204
-    else
-      render :json => @status, :status => 303
-    end
+    head :no_content
   end
 end

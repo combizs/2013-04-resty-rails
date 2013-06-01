@@ -35,11 +35,7 @@ class SubscriptionsController < ApplicationController
   # DELETE /subscriptions/1
   def destroy
     @subscription = Subscription.find(params[:id]).destroy
-    if(@subscription.valid?)
-      render :json => @subscription, :status => 204
-    else
-      render :json => @subscription, :status => 303
-    end
+    head :no_content
   end
 end
 

@@ -35,10 +35,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post = Post.find(params[:id]).destroy
-    if(@post.valid?)
-      render :json => @post, :status => 204
-    else
-      render :json => @post, :status => 303
-    end
+    head :no_content
   end
 end

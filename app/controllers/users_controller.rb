@@ -35,10 +35,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user = User.find(params[:id]).destroy
-    if(@user.valid?)
-      render :json => @user, :status => 204
-    else
-      render :json => @user, :status => 303
-    end
+    head :no_content
   end
 end

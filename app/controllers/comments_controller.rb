@@ -35,10 +35,6 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment = Comment.find(params[:id]).destroy
-    if(@comment.valid?)
-      render :json => @comment, :status => 204
-    else
-      render :json => @comment, :status => 303
-    end
+    head :no_content
   end
 end
