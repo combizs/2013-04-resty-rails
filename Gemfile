@@ -8,6 +8,7 @@ gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
 
 gem 'sqlite3'
 gem 'thin'
+gem 'api_taster'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,9 +37,11 @@ end
 group :test, :development do
   gem "api_taster"
   gem "rspec-rails", "~> 2.0"
+  gem 'guard'
   gem 'rb-readline'
   gem 'pry'
   gem 'pry-doc'
+  gem 'sextant'
   gem 'pry_debug'
 end
 
